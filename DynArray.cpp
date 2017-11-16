@@ -13,23 +13,23 @@
 #include "DynArray.h"
 
 
-DynArray::DynArray() : m_size{0}, m_capacity{8}, m_data{new Lied[m_capacity]} {}
+DynArray::DynArray() : m_size{0}, m_capacity{8}, m_data{new Lied[8]} {}
 
-DynArray::DynArray(int newCapacity) : m_size{0}, m_capacity{newCapacity}, m_data{new Lied[m_capacity]} {}
+DynArray::DynArray(int newCapacity) : m_size{0}, m_capacity{newCapacity}, m_data{new Lied[newCapacity]} {}
 
 DynArray::~DynArray() 
 {
     delete[] m_data;
 };
 
-void DynArray::resize(int newCapacity) 
+void DynArray::resize(int newCapacity)
 {
     if(newCapacity < m_size)
     {
         Lied* new_data = new Lied[newCapacity];
         m_capacity = newCapacity;
         m_size = newCapacity;
-        for(int i = 0; i < m_size; ++i)
+        for(int i = 0; i < newCapacity; ++i)
         {
          new_data[i] = m_data[i];        
         }
@@ -46,7 +46,6 @@ void DynArray::resize(int newCapacity)
 Lied& DynArray::at(int index)
 {
     if(index < m_size && index >= 0) return m_data[index];
-    else throw;
 }
 
 void DynArray::push_back(Lied elem) 
@@ -56,6 +55,7 @@ void DynArray::push_back(Lied elem)
         resize(m_size * 2);    
     }
     m_data[m_size] = elem;
+    ++m_size;
     
 }
 
