@@ -11,6 +11,7 @@
  * Created on November 16, 2017, 5:05 PM
  */
 #include "DynArray.h"
+#include "MP3Lib.h"
 
 
 DynArray::DynArray() : m_size{0}, m_capacity{8}, m_data{new Lied[8]} {}

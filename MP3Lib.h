@@ -5,16 +5,19 @@
 #include <vector>
 #include <sstream>
 #include <string>
+#include "DynArray.h"
 
 using std::cout; using std::cin; using std::vector; using std::string; using std::ostringstream; using std::ostream; using std::istream;
+
 enum Genre{Pop, Rock, Klassik, Hard_Rock, Metal, Hip_Hop};
 
 void menu(); 
 
+
 class Lied {
 public:
-    Lied() : titel{""}, interpret{""}, erscheinungsjahr{0}, laenge{0.0}, genre{Genre::Rock} {}
-    Lied(string title, string interpreter, int year, double len, int genre);
+    Lied();
+    Lied(string , string , int , double , int) ;
    
     void print();
     
@@ -47,10 +50,10 @@ public:
     void editSong();
     int getIndex();
     void printEntry();
-    int getSize() {return lieder.size();}
+    int getSize();
     
 private:
-    vector<Lied> lieder;
+    DynArray lieder;
 };
 
 

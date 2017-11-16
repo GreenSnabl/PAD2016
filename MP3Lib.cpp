@@ -17,15 +17,7 @@ void menu(){
     
 }
 
-
-
-void Lied::setInterpret(std::string newInterpret) {if (newInterpret.size() < 80 && newInterpret.size() > 0) interpret = newInterpret;}
-void Lied::setTitle(string newTitle) { if(newTitle.size() < 100 && newTitle.size() > 0) titel = newTitle;}
-void Lied::setYear(int year) {if(year > 0 && year < 2018) erscheinungsjahr = year;}
-void Lied::setLength(double len) {if (len > 0) laenge = len;}
-void Lied::setGenre(int newGenre) {if (newGenre >= 0 && newGenre < 6) genre = (Genre)newGenre;}
-
-
+Lied::Lied() : titel{""}, interpret{""}, erscheinungsjahr{0}, laenge{0.0}, genre{Genre::Rock} {}
 Lied::Lied(string title, string interpreter, int year, double len, int genre)
 {
     setTitle(title);
@@ -34,6 +26,16 @@ Lied::Lied(string title, string interpreter, int year, double len, int genre)
     setLength(len);
     setGenre(genre);
 }
+
+
+
+
+void Lied::setInterpret(std::string newInterpret) {if (newInterpret.size() < 80 && newInterpret.size() > 0) interpret = newInterpret;}
+void Lied::setTitle(string newTitle) { if(newTitle.size() < 100 && newTitle.size() > 0) titel = newTitle;}
+void Lied::setYear(int year) {if(year > 0 && year < 2018) erscheinungsjahr = year;}
+void Lied::setLength(double len) {if (len > 0) laenge = len;}
+void Lied::setGenre(int newGenre) {if (newGenre >= 0 && newGenre < 6) genre = (Genre)newGenre;}
+
 
 string Lied::getGenre()
 {
@@ -88,7 +90,7 @@ void Liedverwaltung::printAll()
 {
     for (int i = 0; i < lieder.size(); ++i)
     {
-        lieder[i].print();
+        lieder.at(i).print();
         cout << "\n";
     }
 
@@ -108,15 +110,17 @@ int Liedverwaltung::getIndex()
 void Liedverwaltung::printEntry()
 {
     int index = getIndex();
-    lieder[index-1].print();
+    lieder.at(index-1).print();
 }
+
+int Liedverwaltung::getSize() {return lieder.size();}
 
 void Liedverwaltung::eraseLied(int index)
 {
     if(index < lieder.size()-1 && index >= 0) {
     for (int i = index; i < lieder.size() - 1; ++i)
     {
-        lieder[i] = lieder[i+1];    
+        lieder.at(i) = lieder.at(i+1);    
     }
     }
     if(index < lieder.size() && index >= 0) lieder.pop_back();
@@ -144,11 +148,11 @@ void Liedverwaltung::editSong()
     cin >> token;
     switch (token)
     {
-        case 'i': case 'I': cin.ignore(); cout << "\nInterpret: "; getline(cin, str); lieder[index-1].setInterpret(str); break;
-        case 't': case 'T': cin.ignore(); cout << "\nTitel: "; getline(cin, str); lieder[index-1].setTitle(str); break;
-        case 'e': case 'E': cout << "\nErscheinungsjahr: "; cin >> year; lieder[index-1].setYear(year); break;
-        case 'd': case 'D': cout << "\nLänge: "; cin >> length; lieder[index-1].setLength(length); break;
-        case 'g': case 'G': cout << "\nGenre:\n\t(1) Pop\t\t(2) Rock\t(3) Klassik\n\t(4) Hard Rock\t(5) Metal\t(6) Hip Hop\n"; cin >> genre; lieder[index-1].setGenre(genre); break;
+        case 'i': case 'I': cin.ignore(); cout << "\nInterpret: "; getline(cin, str); lieder.at(index-1).setInterpret(str); break;
+        case 't': case 'T': cin.ignore(); cout << "\nTitel: "; getline(cin, str); lieder.at(index-1).setTitle(str); break;
+        case 'e': case 'E': cout << "\nErscheinungsjahr: "; cin >> year; lieder.at(index-1).setYear(year); break;
+        case 'd': case 'D': cout << "\nLänge: "; cin >> length; lieder.at(index-1).setLength(length); break;
+        case 'g': case 'G': cout << "\nGenre:\n\t(1) Pop\t\t(2) Rock\t(3) Klassik\n\t(4) Hard Rock\t(5) Metal\t(6) Hip Hop\n"; cin >> genre; lieder.at(index-1).setGenre(genre); break;
         case 48: return;
     }
     cout << "\n";

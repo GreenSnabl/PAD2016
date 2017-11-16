@@ -1,6 +1,7 @@
 #ifndef DYNARRAY_H
 #define DYNARRAY_H
-#include "MP3Lib.h"
+
+class Lied;
 
 class DynArray
 {
